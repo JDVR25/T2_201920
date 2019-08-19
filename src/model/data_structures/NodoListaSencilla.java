@@ -18,13 +18,11 @@ public class NodoListaSencilla<E> implements Serializable
 	/**
 	 * Elemento almacenado en el nodo.
 	 */
-	//TODO 6.1.1 Declare como atributo el elemento que se almacenará en el nodo
 	protected E elemento;
 
 	/**
 	 * Siguiente nodo.
 	 */
-	//TODO 6.1.2 Declare una referencia al siguiente elemento
 	protected NodoListaSencilla<E> siguiente;
 
 	/**
@@ -33,7 +31,6 @@ public class NodoListaSencilla<E> implements Serializable
 	 */
 	public NodoListaSencilla(E elemento)
 	{
-		//TODO 6.1.3 Asigne el elemento que llega como parámetro al atributo
 		this.elemento = elemento;
 	}
 
@@ -44,7 +41,6 @@ public class NodoListaSencilla<E> implements Serializable
 	 */
 	public void cambiarSiguiente(NodoListaSencilla<E> siguiente)
 	{
-		//TODO 6.1.4 Cambie el siguiente nodo por el que llega como parámetro
 		this.siguiente = siguiente;
 	}
 

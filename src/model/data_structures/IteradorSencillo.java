@@ -8,7 +8,6 @@ import java.util.NoSuchElementException;
  * Clase que representa el iterador sencillo (sólo avanza hacia adelante).
  * @param <E> Tipo de información que almacena el iterador.
  */
-//TODO 9.1 Revisar la clase para implementar el IteradorLista 
 public class IteradorSencillo<E> implements Iterator<E>, Serializable 
 {
 
