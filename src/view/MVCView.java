@@ -14,11 +14,11 @@ public class MVCView
 	    
 		public void printMenu()
 		{
-			System.out.println("1. Crear Arreglo Dinamico de Strings");
-			System.out.println("2. Agregar String");
-			System.out.println("3. Buscar String");
-			System.out.println("4. Eliminar String");
-			System.out.println("5. Imprimir el Arreglo");
+			System.out.println("1. Cargar los viajes de UBER");
+			System.out.println("2. Ingresar mes de consulta");
+			System.out.println("3. Ingresar identificador de la zona de origen a consultar");
+			System.out.println("4. Consultar viajes del mes de consulta que salieron de la zona de origen dada");
+			System.out.println("5. Consultar estadisticas");
 			System.out.println("6. Exit");
 			System.out.println("Dar el numero de opcion a resolver, luego oprimir tecla Return: (e.g., 1):");
 		}
