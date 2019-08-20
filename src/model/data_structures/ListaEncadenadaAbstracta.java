@@ -1,10 +1,7 @@
 package model.data_structures;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
-
 
 /**
  * Clase que contiene lo común entre las listas encadenadas.
@@ -28,6 +25,23 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 	 */
 	protected NodoListaSencilla<E> primerNodo;
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object[] toArray() 
+	{
+		E[] arreglo = (E[]) new Object[size()];
+		NodoListaSencilla<E> actual = primerNodo;
+		int pos = 0;
+		while(actual != null)
+		{
+			arreglo[pos] = actual.darElemento();
+			actual = actual.darSiguiente();
+			pos ++;
+		}
+
+		return arreglo;
+	}
+	
 	@Override
 	public int size() 
 	{
@@ -148,4 +162,5 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 		primerNodo = null;
 		cantidadElementos = 0;
 	}
+	//Codigo basado en lo desarrollado en el ejercicio de nivel 9 de APO 2 (Honores) 201910
 }

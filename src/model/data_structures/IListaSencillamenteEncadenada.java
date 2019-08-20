@@ -21,4 +21,6 @@ public interface IListaSencillamenteEncadenada<E> extends Iterable<E>
 	public boolean remove(Object objeto);
 
 	public E remove(int pos);
+
+	public Object[] toArray();
 }

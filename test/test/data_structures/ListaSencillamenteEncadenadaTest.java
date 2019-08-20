@@ -11,8 +11,5 @@ public class ListaSencillamenteEncadenadaTest extends ListaAbstractaNoOrdenadaTe
 		lista = new ListaSencillamenteEncadenada<>();		
 	}
 
-	@Override
-	public void testListIterator() {
-		//No se probará en esta prueba.
-	}
+	//Codigo basado en el ejercicio de nivel 9 de APO 2 (Honores) 201910
 }

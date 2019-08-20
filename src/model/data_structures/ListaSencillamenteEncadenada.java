@@ -150,4 +150,5 @@ public class ListaSencillamenteEncadenada<E> extends ListaEncadenadaAbstracta<E>
 
 		return borrado;
 	}
+	//Codigo basado en lo desarrollado en el ejercicio de nivel 9 de APO 2 (Honores) 201910
 }

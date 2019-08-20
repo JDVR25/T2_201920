@@ -14,6 +14,8 @@ import java.util.NoSuchElementException;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.data_structures.IListaSencillamenteEncadenada;
+
 /**
  * Clase de prueba con los métodos necesarios para probar cualquier tipo de lista.
  * Esta clase de pruebas no tiene en cuenta las particularidades de cada tipo de lista.
@@ -24,7 +26,7 @@ public abstract class ListaAbstractaTest
 	/**
 	 * Lista sobre la que se realizarán las pruebas.
 	 */
-	protected List<Integer> lista;
+	protected IListaSencillamenteEncadenada<Integer> lista;
 	
 	/**
 	 * Arreglo con los elementos del escenario 2 (sirve para realizar pruebas exhaustivas).
@@ -227,7 +229,7 @@ public abstract class ListaAbstractaTest
 	 * Método que prueba el primer toarray
 	 */
 	@Test
-	public void testToArray1()
+	public void testToArray()
 	{
 		//Prueba con la lista vacía.
 		Object[] arreglo = lista.toArray();
@@ -247,35 +249,6 @@ public abstract class ListaAbstractaTest
 		arreglo = lista.toArray();
 		assertNotNull("El arreglo no puede ser null", arreglo);
 		assertEquals("El tamaño del arreglo no es el esperado", ARREGLO_ESCENARIO_2.length, arreglo.length);	
-	}
-	
-	/**
-	 * Prueba el segundo método toArray (que tiene un parámetro).
-	 */
-	@Test
-	public void testToArray2()
-	{
-		//Prueba con la lista vacía.
-		Integer[] arreglo = new Integer[lista.size()];
-		arreglo = lista.toArray(arreglo);
-		assertNotNull("El arreglo no puede ser null", arreglo);
-		assertEquals("El arreglo con la lista vacía no está vacío", 0, arreglo.length);
-		
-		//Prueba la lista con dos elementos.
-		lista.add(5);
-		lista.add(30);
-		arreglo = new Integer[lista.size()];
-		arreglo = lista.toArray(arreglo);
-		assertNotNull("El arreglo no puede ser null", arreglo);
-		assertEquals("El arreglo con la lista vacía no está vacío", 2, arreglo.length);
-		
-		//Prueba la lista con 20 elementos.
-		lista.clear();
-		setupEscenario2();
-		arreglo = new Integer[lista.size()];
-		arreglo = lista.toArray(arreglo);
-		assertNotNull("El arreglo no puede ser null", arreglo);
-		assertEquals("El tamaño del arreglo no es el esperado", ARREGLO_ESCENARIO_2.length, arreglo.length);
 	}
 	
 	/**
@@ -355,176 +328,6 @@ public abstract class ListaAbstractaTest
 		assertTrue("Debería poder eliminar el elemento de la lista", lista.remove(new Integer(446)));
 		assertFalse("No se eliminó el elemento", lista.contains(new Integer(446)));
 		assertEquals("El tamaño de la lista no es el esperado", 16, lista.size());
-		
-		assertFalse("La lista no debería tener elementos repetidos", hayRepetidos());
-	}
-	
-	/**
-	 * Prueba que revisa el método contains all.
-	 */
-	@Test
-	public void testContainsAll()
-	{
-		//Prueba la lista vacía.
-		ArrayList<Integer> arreglo = new ArrayList<>();
-		assertTrue("La lista vacía no contiene ningún elemento, por lo tanto debería ser correcto", lista.containsAll(arreglo));
-		
-		arreglo.add(5);
-		arreglo.add(8);
-		
-		assertFalse("La lista vacía no contiene el 5 y el 8", lista.containsAll(arreglo));
-		
-		//Prueba con un elemento.
-		lista.add(8);
-		
-		assertFalse("La lista con el 8 no contiene el 5 y el 8", lista.containsAll(arreglo));
-		
-		lista.add(5);
-		
-		assertTrue("La lista contiene los mismos elementos del arreglo", lista.containsAll(arreglo));
-		
-		arreglo.add(49);
-		assertFalse("El arreglo contiene un elemento que no está en la lista", lista.containsAll(arreglo));
-		
-		//Prueba con 20 elementos.
-		lista.clear();
-		setupEscenario2();
-		
-		assertFalse("El arreglo contiene elementos que no se encuentran en la lista", lista.containsAll(arreglo));
-		
-		arreglo.clear();
-		
-		assertTrue("La lista contiene todos los elementos de la lista, porque no hay ninguno", lista.containsAll(arreglo));
-		
-		arreglo.add(lista.get(0));
-		arreglo.add(lista.get(lista.size() - 1));
-		arreglo.add(lista.get(3));
-		arreglo.add(lista.get(18));
-		arreglo.add(lista.get(10));
-		
-		assertTrue("La lista dice no contiene los elementos que fueron sacados de la propia lista", lista.containsAll(arreglo));
-		
-		arreglo.add(8);
-		
-		assertFalse("El arreglo contiene un elemento que no está en la lista", lista.containsAll(arreglo));
-	}
-	
-	/**
-	 * Prueba el método addAll
-	 */
-	@Test
-	public void testAddAll()
-	{
-		ArrayList<Integer> elementos = new ArrayList<Integer>();
-		elementos.add(50);
-		elementos.add(400);
-		elementos.add(145);
-		elementos.add(259);
-		
-		//Prueba con la lista vacía
-		lista.addAll(elementos);
-		assertFalse("La lista ya no está vacía", lista.isEmpty());
-		assertEquals("No se agregaron todos los elementos", elementos.size(), lista.size());
-		
-		//Se prueba la lista con 20 elementos.
-		lista.clear();
-		setupEscenario2();
-		
-		lista.addAll(elementos);
-		assertEquals("No se agregaron todos los elementos", 20 + elementos.size(), lista.size() );
-		
-		assertFalse("La lista no debería tener elementos repetidos", hayRepetidos());
-	}
-	
-	/**
-	 * Prueba el método removeAll
-	 */
-	@Test
-	public void testRemoveAll()
-	{
-		//Prueba con la lista vacía
-		ArrayList<Integer> elementos = new ArrayList<Integer>();
-		elementos.add(50);
-		elementos.add(400);
-		elementos.add(145);
-		elementos.add(259);
-		
-		assertFalse("No debería eliminar ningún elemento porque la lista está vacía", lista.removeAll(elementos));
-		
-		//Prueba con 20 elementos.
-		setupEscenario2();
-		assertFalse("No debería eliminar ningún elemento porque la lista no contiene ningún elemento", lista.removeAll(elementos));
-		assertEquals("No debería cambiar la cantidad de elementos", 20, lista.size());
-		
-		elementos.add(233);
-		
-		assertTrue("Debió eliminar el 233", lista.removeAll(elementos));
-		assertFalse("Debió eliminar el elemento", lista.contains(233));
-		assertEquals("Debería cambiar la cantidad de elementos", 19, lista.size());
-		
-		elementos.add(lista.get(0));
-		elementos.add(lista.get(lista.size() - 1));
-		elementos.add(lista.get(3));
-		elementos.add(lista.get(18));
-		elementos.add(lista.get(10));
-		
-		assertTrue("Debió eliminar los elementos", lista.removeAll(elementos));
-		assertEquals("Debería cambiar la cantidad de elementos", 15, lista.size());
-		
-		for(Integer actual : elementos)
-		{
-			assertFalse("La lista no debería contener ninguno de los elementos eliminados", lista.contains(actual));
-		}		
-		
-		assertFalse("La lista no debería tener elementos repetidos", hayRepetidos());
-	}
-	
-	/**
-	 * Prueba el método retainAll
-	 */
-	@Test
-	public void testRetainAll()
-	{
-		ArrayList<Integer> elementos = new ArrayList<Integer>();
-		elementos.add(50);
-		elementos.add(400);
-		elementos.add(145);
-		elementos.add(259);
-		
-		//Prueba con la lista vacía.
-		assertFalse("Si no hay elementos, no debería realizar ningún cambio", lista.retainAll(elementos));
-		
-		//Prueba con 20 elementos
-		
-		//Si no hay ningún elemento en elementos que esté en la lista.
-		setupEscenario2();
-		assertTrue("Debía eliminar todos los elementos", lista.retainAll(elementos));
-		assertEquals("No debería quedar ningún elemento en la lista", 0, lista.size());
-		
-		//Si hay un elemento en elementos que esté en la lista
-		setupEscenario2();
-		elementos.add(233);
-		assertTrue("Debía eliminar todos los elementos excepto uno", lista.retainAll(elementos));
-		assertEquals("Debería quedar sólo un elemento en la lista", 1, lista.size());
-		
-		//Si todos los elementos de la lista están en elementos.
-		lista.clear();
-		setupEscenario2();
-		elementos.addAll(lista);
-		assertFalse("No debía eliminar ningún elemento, porque todos están en elementos", lista.retainAll(elementos));
-		assertEquals("La lista debería quedar intacta", 20, lista.size());
-		
-		// Si sólo algunos elementos de la lista están en elementos.
-		elementos.clear();
-		elementos.add(lista.get(16));
-		elementos.add(lista.get(3));
-		elementos.add(lista.get(18));
-		elementos.add(lista.get(10));
-		elementos.add(lista.get(16));
-		elementos.add(lista.get(8));
-		
-		assertTrue("Debería eliminar elementos", lista.retainAll(elementos));
-		assertEquals("La lista debería tener 5 elementos", 5, lista.size());
 		
 		assertFalse("La lista no debería tener elementos repetidos", hayRepetidos());
 	}
@@ -735,93 +538,6 @@ public abstract class ListaAbstractaTest
 			fail("Debería dejar realizar la operación porque el índice se encuentra en el rango");
 		}
 	}
-	
-	/**
-	 * Prueba del método indexOf.
-	 */
-	@Test
-	public void testIndexOf()
-	{
-		//Prueba con la lista vacía
-		assertEquals("Como no hay elementos en la lista, el resultado debería ser -1", -1, lista.indexOf(50));
-		
-		//Prueba con 20 elementos
-		setupEscenario2();
-		
-		assertEquals("El elemento no se encuentra en la lista", -1, lista.indexOf(10));
-		assertEquals("El elemento no se encuentra en la lista", -1, lista.indexOf(248));
-		assertEquals("El elemento no se encuentra en la lista", -1, lista.indexOf(448));
-		assertEquals("El elemento no se encuentra en la lista", -1, lista.indexOf(366));
-	}
-	
-	/**
-	 * Prueba del método lastIndexOf
-	 */
-	@Test
-	public void testLastIndexOf()
-	{
-		//Prueba con la lista vacía
-		assertEquals("Como no hay elementos en la lista, el resultado debería ser -1", -1, lista.lastIndexOf(50));
-		
-		//Prueba con 20 elementos
-		setupEscenario2();
-		
-		assertEquals("El elemento no se encuentra en la lista", -1, lista.indexOf(10));
-		assertEquals("El elemento no se encuentra en la lista", -1, lista.indexOf(248));
-		assertEquals("El elemento no se encuentra en la lista", -1, lista.indexOf(448));
-		assertEquals("El elemento no se encuentra en la lista", -1, lista.indexOf(366));
-	}
-	
-	/**
-	 * Prueba del método subList
-	 */
-	@Test
-	public void testSubList()
-	{
-		//Prueba con la lista vacía.
-		try
-		{
-			lista.subList(0, 1);
-			fail("La lista está vacía, no debería dejar crear sublistas.");
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			
-		}
-		
-		//Prueba con 20 elementos
-		setupEscenario2();
-		
-		try
-		{
-			lista.subList(15, 21);
-			fail("El índice se encuentra fuera de la lista, debería fallar.");
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			//Correcto
-		}
-		
-		try
-		{
-			lista.subList(-1, 15);
-			fail("El índice se encuentra fuera de la lista, debería fallar.");
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			//Correcto
-		}
-		
-		try
-		{
-			lista.subList(0, 20);
-			
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			fail("El índice se encuentra dentro de la lista, no debería fallar.");
-		}
-	}
 
 	/**
 	 * Revisa si hay números repetidos en la lista.
@@ -854,4 +570,6 @@ public abstract class ListaAbstractaTest
 		}
 		return false;
 	}
+	
+	//Codigo basado en el ejercicio de nivel 9 de APO 2 (Honores) 201910
 }

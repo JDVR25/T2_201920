@@ -20,7 +20,6 @@ public abstract class ListaAbstractaNoOrdenadaTest extends ListaAbstractaTest
 	public void testIterator() 
 	{
 		super.testIterator();
-		//Prueba que los elementos del iterador estén en el orden correcto.
 		Iterator<Integer> iterador = lista.iterator();
 		int indiceActual = 0;
 		while(iterador.hasNext())
@@ -39,28 +38,13 @@ public abstract class ListaAbstractaNoOrdenadaTest extends ListaAbstractaTest
 	}
 	
 	@Override
-	public void testToArray1() 
+	public void testToArray() 
 	{
-		super.testToArray1();
-		//Prueba que los elementos en el arreglo estén en el orden correcto.
+		super.testToArray();
 		Object[] arreglo = lista.toArray();
 		for(int i = 0; i < arreglo.length; i++)
 		{
 			assertEquals("El elemento en la posición "+ i + " no es el esperado", ARREGLO_ESCENARIO_2[i], arreglo[i]);
-		}
-	}
-	
-	@Override
-	public void testToArray2() 
-	{
-		super.testToArray2();
-		//Prueba que los elementos en el arreglo estén en el orden correcto
-		Integer[] arreglo = new Integer[lista.size()];
-		arreglo = lista.toArray(arreglo);
-		
-		for(int i = 0; i < arreglo.length; i++)
-		{
-			assertEquals("El elemento en la posición "+ i + " no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), arreglo[i]);
 		}
 	}
 	
@@ -94,239 +78,12 @@ public abstract class ListaAbstractaNoOrdenadaTest extends ListaAbstractaTest
 	}
 	
 	@Override
-	public void testAddAll() {
-		super.testAddAll();
-		ArrayList<Integer> elementos = new ArrayList<Integer>();
-		elementos.add(50);
-		elementos.add(400);
-		elementos.add(145);
-		elementos.add(259);
-		
-		
-		Object[] arreglo = lista.toArray();
-		int i = 0;
-		for(; i < ARREGLO_ESCENARIO_2.length; i ++)
-		{
-			assertEquals("El elemento en la posición " + i + " no es el esperado", ARREGLO_ESCENARIO_2[i], arreglo[i]);
-			assertEquals("El elemento en la posición " + i + " no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), lista.get(i));
-		}
-		
-		for(int j = 0; j < elementos.size(); j++)
-		{
-			assertEquals("El elemento en la posición " + i + " no es el esperado", elementos.get(j), arreglo[i]);
-			assertEquals("El elemento en la posición " + i + " no es el esperado", new Integer(elementos.get(j)), lista.get(i));
-			i++;
-		}		
-	}
-	
-	@Override
 	public void testGet() {
 		super.testGet();
 		
 		for(int i = 0; i < lista.size(); i ++)
 		{
 			assertEquals("El elemento en la posición " + i  + " no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), lista.get(i));
-		}
-	}
-	
-	@Override
-	public void testIndexOf() {
-		super.testIndexOf();
-		
-		for(int i = 0; i < ARREGLO_ESCENARIO_2.length; i ++)
-		{
-			assertEquals("El índice no es el esperado", i, lista.indexOf( ARREGLO_ESCENARIO_2[i]));
-		}
-	}
-	
-	@Override
-	public void testLastIndexOf() {
-		super.testLastIndexOf();
-		
-		for(int i = 0; i < ARREGLO_ESCENARIO_2.length; i ++)
-		{
-			assertEquals("El índice no es el esperado", i, lista.indexOf( ARREGLO_ESCENARIO_2[i]));
-		}
-	}
-	
-	@Override
-	public void testSubList() {
-		super.testSubList();
-		
-		try
-		{
-			List<Integer> sublista = lista.subList(0, 20);
-			assertEquals("La sublista debería tener 20 elementos", 20, sublista.size());
-			for(int i = 0; i < sublista.size(); i++)
-			{
-				assertEquals("El elemento de la sublista no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), lista.get(i));
-			}
-			
-			sublista = lista.subList(0, 10);
-			assertEquals("La sublista debería tener 10 elementos", 10, sublista.size());
-			for(int i = 0; i < 10; i++)
-			{
-				assertEquals("El elemento de la sublista no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), lista.get(i));
-			}
-			
-			sublista = lista.subList(10, 20);
-			assertEquals("La sublista debería tener 10 elementos", 10, sublista.size());
-			for(int i = 10; i < 10; i++)
-			{
-				assertEquals("El elemento de la sublista no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i + 10]), lista.get(i));
-			}
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			fail("Los índices se encuentran dentro de los índices permitidos, no debería fallar.");
-		}
-	}
-	
-	/**
-	 * Prueba el método add all con índice.
-	 */
-	@Test
-	public void testAddAllIndice()
-	{
-		ArrayList<Integer> elementos = new ArrayList<Integer>();
-		elementos.add(50);
-		elementos.add(400);
-		elementos.add(145);
-		elementos.add(259);
-		
-		//Prueba la lista vacía.
-		try
-		{
-			lista.addAll(-1, elementos);
-			fail("Debería lanzar la excepción porque el índice está por fuera de la lista");
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			//Funciona
-		}
-		
-		try
-		{
-			lista.addAll(1, elementos);
-			fail("Debería lanzar la excepción porque el índice está por fuera de la lista");
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			//Funciona
-		}
-		
-		try
-		{
-			lista.addAll(0, elementos);
-			assertEquals("El número de elementos no es correcto", 4, lista.size());
-			for(int i = 0; i < elementos.size(); i ++)
-			{
-				assertEquals("El elemento no es el esperado", elementos.get(i), lista.get(i));
-			}
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			fail("No debería lanzar excepción, debería agregar al inicio.");
-		}
-		
-		lista.clear();
-		
-		//Prueba con 20 elementos.
-		setupEscenario2();
-		
-		try
-		{
-			lista.addAll(-1, elementos);
-			fail("Debería lanzar la excepción porque el índice está por fuera de la lista");
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			//Funciona
-		}
-		
-		try
-		{
-			lista.addAll(21, elementos);
-			fail("Debería lanzar la excepción porque el índice está por fuera de la lista");
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			//Funciona
-		}
-		
-		try
-		{
-			lista.addAll(0, elementos);
-			assertEquals("El número de elementos no es correcto", 24, lista.size());
-			for(int i = 0; i < elementos.size(); i ++)
-			{
-				assertEquals("El elemento no es el esperado", elementos.get(i), lista.get(i));
-			}
-			
-			for(int i = 4; i < lista.size(); i ++)
-			{
-				assertEquals("El elemento no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i - 4]), lista.get(i));
-			}
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			fail("No debería lanzar excepción, los índices son correctos.");
-		}
-		
-		lista.clear();
-		setupEscenario2();
-		
-		try
-		{
-			lista.addAll(20, elementos);
-			assertEquals("El número de elementos no es correcto", 24, lista.size());
-			
-			for(int i = 0; i < ARREGLO_ESCENARIO_2.length; i ++)
-			{
-				assertEquals("El elemento no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), lista.get(i));
-			}
-			
-			for(int i = 0; i < elementos.size(); i ++)
-			{
-				assertEquals("El elemento no es el esperado", elementos.get(i), lista.get(i + 20));
-			}
-			
-			
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			fail("No debería lanzar excepción, los índices son correctos.");
-		}
-		
-		lista.clear();
-		setupEscenario2();
-		
-		try
-		{
-			lista.addAll(10, elementos);
-			assertEquals("El número de elementos no es correcto", 24, lista.size());
-			
-			for(int i = 0; i < 10; i ++)
-			{
-				assertEquals("El elemento no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), lista.get(i));
-			}
-			
-			for(int i = 0; i < elementos.size(); i ++)
-			{
-				assertEquals("El elemento no es el esperado", elementos.get(i), lista.get(i + 10));
-			}
-			
-			for(int i = 10; i < ARREGLO_ESCENARIO_2.length; i ++)
-			{
-				assertEquals("El elemento no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), lista.get(i + 4));
-			}
-			
-			
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			e.printStackTrace();
-			fail("No debería lanzar excepción, los índices son correctos.");
 		}
 	}
 	
@@ -403,7 +160,6 @@ public abstract class ListaAbstractaNoOrdenadaTest extends ListaAbstractaTest
 	@Test
 	public void addIndice()
 	{
-		//Prueba con la lista vacía
 		try
 		{
 			lista.add(1, 5);
@@ -473,114 +229,5 @@ public abstract class ListaAbstractaNoOrdenadaTest extends ListaAbstractaTest
 		}
 	}
 	
-	/**
-	 * Prueba el método listIterator
-	 */
-	@Test
-	public void testListIterator()
-	{
-		//Prueba con la lista vacía.
-		ListIterator<Integer> iterator = lista.listIterator();
-		assertFalse("No debería poder avanzar", iterator.hasNext());
-		assertFalse("No debería poder retroceder", iterator.hasPrevious());
-		
-		try
-		{
-			iterator.next();
-			fail("Debería lanzar la excepción");
-		}
-		catch(NoSuchElementException e)
-		{
-			//
-		}
-		
-		try
-		{
-			iterator.previous();
-			fail("Debería lanzar la excepción");
-		}
-		catch(NoSuchElementException e)
-		{
-			//
-		}
-		
-		//Prueba con 20 elementos
-		setupEscenario2();
-		
-		iterator = lista.listIterator();
-		assertFalse("No debería poder retroceder", iterator.hasPrevious());
-		try
-		{
-			iterator.previous();
-			fail("Debería lanzar la excepción");
-		}
-		catch(NoSuchElementException e)
-		{
-			//
-		}
-		
-		int i = 0;
-		for(; i < 10; i++)
-		{
-			assertTrue("Debería poder avanzar", iterator.hasNext());
-			assertEquals("El elemento siguiente no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), iterator.next());
-		}
-		
-		i--;
-		
-		for(; i >= 0; i--)
-		{
-			assertTrue("Debería poder retroceder", iterator.hasPrevious());
-			assertEquals("El elemento siguiente no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), iterator.previous());
-		}
-		
-		assertFalse("No debería poder retroceder", iterator.hasPrevious());
-		try
-		{
-			iterator.previous();
-			fail("Debería lanzar la excepción");
-		}
-		catch(NoSuchElementException e)
-		{
-			//
-		}
-		
-		i++;
-		
-		for(; i < ARREGLO_ESCENARIO_2.length; i++)
-		{
-			assertTrue("Debería poder avanzar", iterator.hasNext());
-			assertEquals("El elemento siguiente no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), iterator.next());
-		}
-		
-		assertFalse("No debería poder retroceder", iterator.hasNext());
-		try
-		{
-			iterator.next();
-			fail("Debería lanzar la excepción");
-		}
-		catch(NoSuchElementException e)
-		{
-			
-		}
-		
-		i--;
-		
-		for(; i >= 0; i--)
-		{
-			assertTrue("Debería poder retroceder", iterator.hasPrevious());
-			assertEquals("El elemento siguiente no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), iterator.previous());
-		}
-		
-		assertFalse("No debería poder retroceder", iterator.hasPrevious());
-		try
-		{
-			iterator.previous();
-			fail("Debería lanzar la excepción");
-		}
-		catch(NoSuchElementException e)
-		{
-			//
-		}
-	}
+	//Codigo basado en el ejercicio de nivel 9 de APO 2 (Honores) 201910
 }

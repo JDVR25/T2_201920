@@ -45,5 +45,5 @@ public class IteradorSencillo<E> implements Iterator<E>, Serializable
 		actual = actual.darSiguiente();
 		return valor;
 	}
-
+	//Codigo basado en lo desarrollado en el ejercicio de nivel 9 de APO 2 (Honores) 201910
 }

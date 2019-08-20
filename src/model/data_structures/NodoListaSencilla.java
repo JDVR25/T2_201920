@@ -71,5 +71,5 @@ public class NodoListaSencilla<E> implements Serializable
 	{
 		return siguiente;
 	}
-
+	//Codigo basado en lo desarrollado en el ejercicio de nivel 9 de APO 2 (Honores) 201910
 }
