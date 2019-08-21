@@ -4,8 +4,6 @@ public interface IListaSencillamenteEncadenada<E> extends Iterable<E>
 {
 	public int size();
 
-	public E set(int index, E element) throws IndexOutOfBoundsException;
-
 	public boolean isEmpty();
 
 	public E get(int index) throws IndexOutOfBoundsException;
@@ -14,7 +12,7 @@ public interface IListaSencillamenteEncadenada<E> extends Iterable<E>
 
 	public void clear();
 
-	public boolean add(E elemento);
+	public boolean addLast(E elemento);
 
 	public void add(int index, E elemento);
 
@@ -23,4 +21,12 @@ public interface IListaSencillamenteEncadenada<E> extends Iterable<E>
 	public E remove(int pos);
 
 	public Object[] toArray();
+	
+	public boolean addFirst();
+	
+	public boolean removeFirst();
+	
+	public boolean removeLast();
+
+	public int indexOf(Object o);
 }

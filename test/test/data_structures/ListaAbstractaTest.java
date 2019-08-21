@@ -48,7 +48,7 @@ public abstract class ListaAbstractaTest
 	{
 		for(int actual: ARREGLO_ESCENARIO_2)
 		{
-			lista.add(actual);
+			lista.addLast(actual);
 		}
 	}
 	
@@ -63,8 +63,8 @@ public abstract class ListaAbstractaTest
 		
 		//Prueba la lista con dos elementos
 		
-		lista.add(5);
-		lista.add(30);
+		lista.addLast(5);
+		lista.addLast(30);
 		
 		assertEquals("El tamaño de la lista con dos elementos no es correcto", 2, lista.size());
 		
@@ -79,8 +79,8 @@ public abstract class ListaAbstractaTest
 		
 		//Agrega dos elementos más y prueba
 		
-		lista.add(5);
-		lista.add(30);
+		lista.addLast(5);
+		lista.addLast(30);
 		
 		assertEquals("El tamaño de la lista con 22 elementos no es correcto", ARREGLO_ESCENARIO_2.length + 2, lista.size());
 	}
@@ -95,8 +95,8 @@ public abstract class ListaAbstractaTest
 		assertTrue("Al inicio la lista debería estar vacía", lista.isEmpty());
 		
 		//Prueba la lista con dos elementos.
-		lista.add(5);
-		lista.add(30);
+		lista.addLast(5);
+		lista.addLast(30);
 		
 		assertFalse("Al agregar elementos la lista no debería estar vacía", lista.isEmpty());
 		
@@ -123,8 +123,8 @@ public abstract class ListaAbstractaTest
 		assertFalse("Al inicio no debería encontrar ningún elemento", lista.contains(new Double(80)));
 		
 		//Prueba con dos elementos
-		lista.add(5);
-		lista.add(30);
+		lista.addLast(5);
+		lista.addLast(30);
 		
 		assertTrue("Debería contener el elemento", lista.contains(5));
 		assertTrue("Debería contener el elemento", lista.contains(30));
@@ -166,8 +166,8 @@ public abstract class ListaAbstractaTest
 		}
 		
 		//Prueba el iterador con dos elementos.
-		lista.add(5);
-		lista.add(30);
+		lista.addLast(5);
+		lista.addLast(30);
 		
 		iterador = lista.iterator();
 		assertNotNull("No debería retornar un iterador vacío", iterador);
@@ -237,8 +237,8 @@ public abstract class ListaAbstractaTest
 		assertEquals("El arreglo con la lista vacía no está vacío", 0, arreglo.length);
 		
 		//Prueba la lista con dos elementos.
-		lista.add(5);
-		lista.add(30);
+		lista.addLast(5);
+		lista.addLast(30);
 		arreglo = lista.toArray();
 		assertNotNull("El arreglo no puede ser null", arreglo);
 		assertEquals("El arreglo con la lista vacía no está vacío", 2, arreglo.length);
@@ -262,8 +262,8 @@ public abstract class ListaAbstractaTest
 		assertEquals("El tamaño de la lista al principio no es 0", 0, lista.size());
 
 		//Agrega dos elementos.
-		assertTrue("No agrega el elemento", lista.add(5));
-		assertTrue("No agrega el elemento", lista.add(30));
+		assertTrue("No agrega el elemento", lista.addLast(5));
+		assertTrue("No agrega el elemento", lista.addLast(30));
 		assertFalse("La lista no debería estar vacía", lista.isEmpty());
 		assertEquals("La lista debería tener 2 elementos", 2, lista.size());
 
@@ -288,9 +288,9 @@ public abstract class ListaAbstractaTest
 		assertFalse("No debería eliminar elementos porque la lista está vacía", lista.remove(new Integer(40)));
 		
 		//Prueba con una lista de 3 elementos.
-		lista.add(3);
-		lista.add(40);
-		lista.add(30);
+		lista.addLast(3);
+		lista.addLast(40);
+		lista.addLast(30);
 		assertEquals("El tamaño del arreglo no es el esperado", 3, lista.size());
 		
 		assertTrue("Debería poder eliminar el elemento de la lista", lista.remove(new Integer(3)));

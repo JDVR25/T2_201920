@@ -3,6 +3,8 @@ package model.data_structures;
 import java.io.Serializable;
 import java.util.Iterator;
 
+import uniandes.cupi2.apo2H.estructuras.NodoListaSencilla;
+
 /**
  * Clase que contiene lo común entre las listas encadenadas.
  * @param <E> Elemento que se almacenará en la lista, el elemento debe ser únicamente identificado.
@@ -49,31 +51,6 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 	}
 
 	@Override
-	public E set(int index, E element) throws IndexOutOfBoundsException 
-	{
-		NodoListaSencilla<E> nodo = primerNodo;
-		E retornar = null;
-
-		int i = 0;
-		if(index >= size() || index < 0)
-		{
-			throw new IndexOutOfBoundsException();
-		}
-		else
-		{
-			while(i != index)
-			{
-				nodo = nodo.darSiguiente();
-				i++;
-			}
-			retornar = nodo.darElemento();
-			nodo.cambiarElemento(element);
-		}
-
-		return retornar;
-	}
-
-	@Override
 	public Iterator<E> iterator() 
 	{
 		return new IteradorSencillo<E>(primerNodo);
@@ -83,6 +60,31 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 	public boolean isEmpty() 
 	{
 		return cantidadElementos == 0? true: false;
+	}
+	
+	@Override
+	public int indexOf(Object o) 
+	{
+		//TODO 7.1.5 Complete de acuerdo a la documentación
+		int posicion = -1;
+		NodoListaSencilla<E> actual = primerNodo;
+		int posActual = 0;
+		boolean listo = false;
+		while(actual != null && !listo)
+		{
+			if(actual.darElemento().equals((o)))
+			{
+				posicion = posActual;
+				listo = true;
+			}
+			else
+			{
+				posActual ++;
+				actual = actual.darSiguiente();
+			}
+		}
+
+		return posicion;
 	}
 
 	@Override

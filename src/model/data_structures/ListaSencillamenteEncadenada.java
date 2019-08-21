@@ -34,7 +34,7 @@ public class ListaSencillamenteEncadenada<E> extends ListaEncadenadaAbstracta<E>
 	}
 
 	@Override
-	public boolean add(E elemento) 
+	public boolean addLast(E elemento) 
 	{
 		boolean agregado = false;
 

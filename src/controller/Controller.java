@@ -13,6 +13,10 @@ public class Controller {
 	/* Instancia de la Vista*/
 	private MVCView view;
 	
+	private int mesConsulta = 0;
+	
+	private int idOrigen = 0;
+	
 	/**
 	 * Crear la vista y el modelo del proyecto
 	 * @param capacidad tamaNo inicial del arreglo
@@ -38,51 +42,57 @@ public class Controller {
 				case 1:
 					System.out.println("--------- \nCrear Arreglo \nDar capacidad inicial del arreglo: ");
 				    int capacidad = lector.nextInt();
-				    modelo = new MVCModelo(capacidad); 
+				    modelo = new MVCModelo(); 
 					System.out.println("Arreglo Dinamico creado");
 					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
 					break;
 
 				case 2:
-					System.out.println("--------- \nDar cadena (simple) a ingresar: ");
+					System.out.println("--------- \nDar mes(numero) a consultar: ");
 					dato = lector.next();
-					modelo.agregar(dato);
-					System.out.println("Dato agregado");
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+					try
+					{
+						mesConsulta = Integer.parseInt(dato);
+						System.out.println("Mes guardado");
+					}
+					catch(NumberFormatException e)
+					{
+						System.out.println("Debe ingresar el mes como un numero");
+					}
 					break;
 
 				case 3:
-					System.out.println("--------- \nDar cadena (simple) a buscar: ");
+					System.out.println("--------- \nDar identificador de la zona de origen a consultar: ");
 					dato = lector.next();
-					respuesta = modelo.buscar(dato);
-					if ( respuesta != null)
+					try
 					{
-						System.out.println("Dato encontrado: "+ respuesta);
+						idOrigen = Integer.parseInt(dato);
+						System.out.println("Identificador guardado");
 					}
-					else
+					catch(NumberFormatException e)
 					{
-						System.out.println("Dato NO encontrado");
+						System.out.println("Identificador invalido");
 					}
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
 					break;
 
 				case 4:
-					System.out.println("--------- \nDar cadena (simple) a eliminar: ");
-					dato = lector.next();
-					respuesta = modelo.eliminar(dato);
-					if ( respuesta != null)
+					System.out.println("--------- \nDatos de los viajes: ");
+					if(mesConsulta == 0)
 					{
-						System.out.println("Dato eliminado "+ respuesta);
+						System.out.println("No se ha ingresado un mes");
 					}
-					else
+					if(idOrigen == 0)
 					{
-						System.out.println("Dato NO eliminado");							
+						System.out.println("No se ha ingresado una zona de origen");
 					}
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+					if(idOrigen >= 0 && mesConsulta >= 0)
+					{
+						//pendiente
+					}
 					break;
 
 				case 5: 
-					System.out.println("--------- \nContenido del Arreglo: ");
+					System.out.println("--------- \nEstadisticas de los viajes: ");
 					view.printModelo(modelo);
 					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
 					break;	
