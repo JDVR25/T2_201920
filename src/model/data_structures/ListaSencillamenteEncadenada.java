@@ -9,12 +9,12 @@ public class ListaSencillamenteEncadenada<E> extends ListaEncadenadaAbstracta<E>
 {
 
 	/**
-	 * Constante de serialización.
+	 * Constante de serializaciï¿½n.
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Construye la lista vacía.
+	 * Construye la lista vacï¿½a.
 	 * <b>post: </b> Se ha inicializado el primer nodo en null
 	 */
 	public ListaSencillamenteEncadenada() 
@@ -23,45 +23,27 @@ public class ListaSencillamenteEncadenada<E> extends ListaEncadenadaAbstracta<E>
 	}
 
 	/**
-	 * Se construye una nueva lista cuyo primer nodo  guardará al elemento que llega por parámetro. Actualiza el número de elementos.
+	 * Se construye una nueva lista cuyo primer nodo  guardarï¿½ al elemento que llega por parï¿½metro. Actualiza el nï¿½mero de elementos.
 	 * @param nPrimero el elemento a guardar en el primer nodo
 	 * @throws NullPointerException si el elemento recibido es nulo
 	 */
 	public ListaSencillamenteEncadenada(E nPrimero) throws NullPointerException
 	{
-		primerNodo = new NodoListaSencilla<E>(nPrimero);
+		primerNodo = new Nodo<E>(nPrimero);
 		cantidadElementos = 1;
 	}
 
-	@Override
-	public boolean addLast(E elemento) 
-	{
-		boolean agregado = false;
 
-		if(primerNodo == null)
-		{
-			primerNodo = new NodoListaSencilla<E>(elemento);
-			cantidadElementos = 1;
-			agregado = true;
-		}
-		else
-		{
-			NodoListaSencilla<E> anterior = primerNodo;
-			NodoListaSencilla<E> aAgregar = new NodoListaSencilla<E>(elemento);
-			while(anterior.darSiguiente() != null)
-				anterior = anterior.darSiguiente();
-			anterior.cambiarSiguiente(aAgregar);
-			cantidadElementos++;
-			agregado = true;
-		}
 
-		return agregado;
-	}
-
+	/**
+	 * Agrega un elemento que llega como parametro en el indice que llega como parametro. 
+	 * @param index 
+	 * @param elemento
+	 */
 	@Override
 	public void add(int index, E elemento) 
 	{
-		NodoListaSencilla<E> nuevo = new NodoListaSencilla<E>(elemento);
+		Nodo<E> nuevo = new Nodo<E>(elemento);
 		if(index < 0 || index > size())
 		{
 			throw new IndexOutOfBoundsException();
@@ -75,7 +57,7 @@ public class ListaSencillamenteEncadenada<E> extends ListaEncadenadaAbstracta<E>
 		else
 		{
 			int posicion = 1;
-			NodoListaSencilla<E> anterior = primerNodo;
+			Nodo<E> anterior = primerNodo;
 			while(posicion < index)
 			{
 				anterior = anterior.darSiguiente();
@@ -87,6 +69,10 @@ public class ListaSencillamenteEncadenada<E> extends ListaEncadenadaAbstracta<E>
 		}
 	}
 
+	/**
+	 * Remueve el objeto que el usuario especifica en el parametro de la lista sencillamente encadenada.
+	 * @param objeto 
+	 */
 	@Override
 	public boolean remove(Object objeto) 
 	{
@@ -103,7 +89,7 @@ public class ListaSencillamenteEncadenada<E> extends ListaEncadenadaAbstracta<E>
 			}
 			else
 			{
-				NodoListaSencilla<E> anterior = primerNodo;
+				Nodo<E> anterior = primerNodo;
 				while(anterior != null && !respuesta && anterior.darSiguiente() != null)
 				{
 					if(anterior.darSiguiente().darElemento().equals(elemento))
@@ -120,6 +106,10 @@ public class ListaSencillamenteEncadenada<E> extends ListaEncadenadaAbstracta<E>
 		return respuesta;
 	}
 
+	/**
+	 * Remueve el objeto que esta en la posicion que el usuario ingresa como parametro. 
+	 * @param pos. 
+	 */
 	@Override
 	public E remove(int pos) 
 	{
@@ -137,7 +127,7 @@ public class ListaSencillamenteEncadenada<E> extends ListaEncadenadaAbstracta<E>
 		else
 		{
 			int posicion = 1;
-			NodoListaSencilla<E> anterior = primerNodo;
+			Nodo<E> anterior = primerNodo;
 			while(posicion < pos)
 			{
 				anterior = anterior.darSiguiente();
@@ -150,5 +140,118 @@ public class ListaSencillamenteEncadenada<E> extends ListaEncadenadaAbstracta<E>
 
 		return borrado;
 	}
+
+	/**
+	 * Agrega un elemento que llega como parametro a la ultima posicion de la lista
+	 * @param elemento 
+	 */
+	@Override
+	public boolean addLast(E elemento) 
+	{
+		boolean agregado = false;
+
+		if(primerNodo == null)
+		{
+			primerNodo = new Nodo<E>(elemento);
+			cantidadElementos = 1;
+			agregado = true;
+		}
+		else
+		{
+			Nodo<E> anterior = primerNodo;
+			Nodo<E> aAgregar = new Nodo<E>(elemento);
+			while(anterior.darSiguiente() != null)
+				anterior = anterior.darSiguiente();
+			anterior.cambiarSiguiente(aAgregar);
+			cantidadElementos++;
+			agregado = true;
+		}
+
+		return agregado;
+	}
+
+	@Override
+	public int indexOf(E element) 
+	{
+		return 0;
+	}
+
+	/**
+	 * Agrega un elemento que llega como parametro a la primera posicion de la lista
+	 * @param elemento 
+	 */
+	@Override
+	public boolean addFirst(E elemento) 
+	{
+		boolean agregado = false;
+
+		if(primerNodo == null)
+		{
+			primerNodo = new Nodo<E>(elemento);
+			cantidadElementos = 1;
+			agregado = true;
+		}
+		else
+		{
+			Nodo<E> nuevoPrimero= new Nodo<E>(elemento);
+			nuevoPrimero.cambiarSiguiente(primerNodo);
+			primerNodo = nuevoPrimero; 
+			cantidadElementos++; 
+			agregado = true;
+		}
+		return agregado;
+	}
+
+	/**
+	 * Remueve el primer elemento de la lista
+	 */
+	@Override
+	public boolean removeFirst() 
+	{
+		boolean removed = false;
+		if (primerNodo != null)
+		{
+			primerNodo = primerNodo.darSiguiente();
+			removed = true;
+			cantidadElementos--;
+		}
+		return removed; 
+	}
+
+	/**
+	 * Remueve el ultimo elemento de la lista
+	 */
+	@Override
+	public boolean removeLast() 
+	{
+		boolean removed;
+		if (primerNodo == null)
+		{
+			removed = false; 
+		}
+		else if(primerNodo.darSiguiente() == null)
+		{
+			primerNodo = null; 
+			removed = true; 
+		}
+		else 
+		{
+			while(primerNodo != null && primerNodo.darSiguiente() != null) 
+			{
+				if (primerNodo.darSiguiente().darSiguiente() == null)
+				{
+					primerNodo.cambiarSiguiente(null);
+				}
+				else
+				{
+					primerNodo = primerNodo.darSiguiente(); 
+				}
+			}
+
+			removed = true; 
+		}
+		return removed;
+	}
+	
 	//Codigo basado en lo desarrollado en el ejercicio de nivel 9 de APO 2 (Honores) 201910
 }

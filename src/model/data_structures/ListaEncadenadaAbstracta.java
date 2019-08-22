@@ -3,17 +3,15 @@ package model.data_structures;
 import java.io.Serializable;
 import java.util.Iterator;
 
-import uniandes.cupi2.apo2H.estructuras.NodoListaSencilla;
-
 /**
- * Clase que contiene lo común entre las listas encadenadas.
- * @param <E> Elemento que se almacenará en la lista, el elemento debe ser únicamente identificado.
+ * Clase que contiene lo comï¿½n entre las listas encadenadas.
+ * @param <E> Elemento que se almacenarï¿½ en la lista, el elemento debe ser ï¿½nicamente identificado.
  */
 public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamenteEncadenada<E>, Serializable
 {
 
 	/**
-	 * Constante de serialización.
+	 * Constante de serializaciï¿½n.
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -25,14 +23,14 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 	/**
 	 * Primer nodo de la lista.
 	 */
-	protected NodoListaSencilla<E> primerNodo;
+	protected Nodo<E> primerNodo;
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public Object[] toArray() 
 	{
 		E[] arreglo = (E[]) new Object[size()];
-		NodoListaSencilla<E> actual = primerNodo;
+		Nodo<E> actual = primerNodo;
 		int pos = 0;
 		while(actual != null)
 		{
@@ -51,6 +49,31 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 	}
 
 	@Override
+	public E set(int index, E element) throws IndexOutOfBoundsException 
+	{
+		Nodo<E> nodo = primerNodo;
+		E retornar = null;
+
+		int i = 0;
+		if(index >= size() || index < 0)
+		{
+			throw new IndexOutOfBoundsException();
+		}
+		else
+		{
+			while(i != index)
+			{
+				nodo = nodo.darSiguiente();
+				i++;
+			}
+			retornar = nodo.darElemento();
+			nodo.cambiarElemento(element);
+		}
+
+		return retornar;
+	}
+
+	@Override
 	public Iterator<E> iterator() 
 	{
 		return new IteradorSencillo<E>(primerNodo);
@@ -61,36 +84,11 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 	{
 		return cantidadElementos == 0? true: false;
 	}
-	
-	@Override
-	public int indexOf(Object o) 
-	{
-		//TODO 7.1.5 Complete de acuerdo a la documentación
-		int posicion = -1;
-		NodoListaSencilla<E> actual = primerNodo;
-		int posActual = 0;
-		boolean listo = false;
-		while(actual != null && !listo)
-		{
-			if(actual.darElemento().equals((o)))
-			{
-				posicion = posActual;
-				listo = true;
-			}
-			else
-			{
-				posActual ++;
-				actual = actual.darSiguiente();
-			}
-		}
-
-		return posicion;
-	}
 
 	@Override
 	public E get(int index) throws IndexOutOfBoundsException
 	{
-		NodoListaSencilla<E> nodo = primerNodo;
+		Nodo<E> nodo = primerNodo;
 		E retornar = null;
 
 		int i = 0;
@@ -112,19 +110,19 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 	}
 
 	/**
-	 * Devuelve el nodo de la posición dada
-	 * @param pos la posición  buscada
-	 * @return el nodo en la posición dada 
+	 * Devuelve el nodo de la posiciï¿½n dada
+	 * @param pos la posiciï¿½n  buscada
+	 * @return el nodo en la posiciï¿½n dada 
 	 * @throws IndexOutOfBoundsException si index < 0 o index >= size()
 	 */
-	public NodoListaSencilla<E> darNodo(int index)
+	public Nodo<E> darNodo(int index)
 	{
 		if(index < 0 || index > cantidadElementos)
 		{
-			throw new IndexOutOfBoundsException("Se está pidiendo el indice: " + index + " y el tamaño de la lista es de " + cantidadElementos);
+			throw new IndexOutOfBoundsException("Se estï¿½ pidiendo el indice: " + index + " y el tamaï¿½o de la lista es de " + cantidadElementos);
 		}
 
-		NodoListaSencilla<E> actual = primerNodo;
+		Nodo<E> actual = primerNodo;
 		int posActual = 0;
 		while(actual != null && posActual < index)
 		{
@@ -140,7 +138,7 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 	{
 		boolean contiene = false;
 		int i = 0;
-		NodoListaSencilla<E> nodo = primerNodo;
+		Nodo<E> nodo = primerNodo;
 		if(primerNodo != null)
 		{
 

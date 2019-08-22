@@ -5,13 +5,13 @@ import java.io.Serializable;
 /**
  * Representa un nodo dentro de la lista. Este nodo almacena un elemento.
  *
- * @param <E> Tipo de elemento que se está almacenando dentro de los nodos.
+ * @param <E> Tipo de elemento que se estï¿½ almacenando dentro de los nodos.
  */
-public class NodoListaSencilla<E> implements Serializable
+public class Nodo<E> implements Serializable
 {
 
 	/**
-	 * Constante de Serialización
+	 * Constante de Serializaciï¿½n
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -23,29 +23,29 @@ public class NodoListaSencilla<E> implements Serializable
 	/**
 	 * Siguiente nodo.
 	 */
-	protected NodoListaSencilla<E> siguiente;
+	protected Nodo<E> siguiente;
 
 	/**
 	 * Constructor del nodo.
-	 * @param elemento El elemento que se almacenará en el nodo. elemento != null
+	 * @param elemento El elemento que se almacenarï¿½ en el nodo. elemento != null
 	 */
-	public NodoListaSencilla(E elemento)
+	public Nodo(E elemento)
 	{
 		this.elemento = elemento;
 	}
 
 	/**
-	 * Método que cambia el siguiente nodo.
+	 * Mï¿½todo que cambia el siguiente nodo.
 	 * <b>post: </b> Se ha cambiado el siguiente nodo
 	 * @param siguiente El nuevo siguiente nodo
 	 */
-	public void cambiarSiguiente(NodoListaSencilla<E> siguiente)
+	public void cambiarSiguiente(Nodo<E> siguiente)
 	{
 		this.siguiente = siguiente;
 	}
 
 	/**
-	 * Método que retorna el elemento almacenado en el nodo.
+	 * Mï¿½todo que retorna el elemento almacenado en el nodo.
 	 * @return El elemento almacenado en el nodo.
 	 */
 	public E darElemento()
@@ -55,7 +55,7 @@ public class NodoListaSencilla<E> implements Serializable
 
 	/**
 	 * Cambia el elemento almacenado en el nodo.
-	 * @param elemento El nuevo elemento que se almacenará en el nodo.
+	 * @param elemento El nuevo elemento que se almacenarï¿½ en el nodo.
 	 */
 	public void cambiarElemento(E elemento)
 	{
@@ -64,12 +64,13 @@ public class NodoListaSencilla<E> implements Serializable
 
 
 	/**
-	 * Método que retorna el siguiente nodo.
+	 * Mï¿½todo que retorna el siguiente nodo.
 	 * @return Siguiente nodo
 	 */
-	public NodoListaSencilla<E> darSiguiente()
+	public Nodo<E> darSiguiente()
 	{
 		return siguiente;
 	}
+	
 	//Codigo basado en lo desarrollado en el ejercicio de nivel 9 de APO 2 (Honores) 201910
 }

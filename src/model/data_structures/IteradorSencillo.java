@@ -5,37 +5,44 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Clase que representa el iterador sencillo (sólo avanza hacia adelante).
- * @param <E> Tipo de información que almacena el iterador.
+ * Clase que representa el iterador sencillo (sï¿½lo avanza hacia adelante).
+ * @param <E> Tipo de informaciï¿½n que almacena el iterador.
  */
 public class IteradorSencillo<E> implements Iterator<E>, Serializable 
 {
 
 	/**
-	 * Constante de serialización
+	 * Constante de serializaciï¿½n
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * El nodo donde se encuentra el iterador.
 	 */
-	private NodoListaSencilla<E> actual;
+	private Nodo<E> actual;
+	
 
 	/**
-	 * Constructor del iterador, inicia con el que llega como parámetro.
-	 * @param primerNodo Nodo desde el que se iniciará a recorrer.
+	 * Constructor del iterador, inicia con el que llega como parï¿½metro.
+	 * @param primerNodo Nodo desde el que se iniciarï¿½ a recorrer.
 	 */
-	public IteradorSencillo(NodoListaSencilla<E> primerNodo) 
+	public IteradorSencillo(Nodo<E> primerNodo) 
 	{
 		actual = primerNodo;
 	}
 
+	/**
+	 * Metodo que mira si hay un siguiente en la lista. 
+	 */
 	@Override
 	public boolean hasNext() 
 	{
 		return actual != null;
 	}
 
+	/**
+	 * Metodo que pasa al siguente de la lista. 
+	 */
 	@Override
 	public E next() 
 	{
