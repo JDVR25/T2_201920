@@ -126,12 +126,12 @@ public class Controller {
 				}
 				if(idOrigen > 0 && mesConsulta > 0)
 				{
-					System.out.println("-----Estadisticas:\n");
-					System.out.println("Total viajes del semestre: " + modelo.darNumViajes() + "    /n");
-					System.out.println("Total viajes del mes de consulta: " + modelo.darNumViajesPorMes(mesConsulta) + "    /n");
-					System.out.println("Porcentaje de viajes en el mes de consulta: " + (modelo.darNumViajesPorMes(mesConsulta)/modelo.darNumViajes())*100 +"%     /n");
-					System.out.println("Total viajes del mes de conslta en la zona de consulta: " + modelo.darViajesPorMesYZonaO(mesConsulta, idOrigen).size() + "    /n");
-					System.out.println("Porcentaje de viajes en el mes de consulta partiendo de la zona consultada: " + (modelo.darViajesPorMesYZonaO(mesConsulta, idOrigen).size()/modelo.darNumViajes())*100 +"%    /n");
+					System.out.println("-----Estadisticas: \n");
+					System.out.println("Total viajes del semestre: " + modelo.darNumViajes());
+					System.out.println("Total viajes del mes de consulta: " + modelo.darNumViajesPorMes(mesConsulta));
+					System.out.println("Porcentaje de viajes en el mes de consulta: " + (float)(modelo.darNumViajesPorMes(mesConsulta)*100)/modelo.darNumViajes() +"%");
+					System.out.println("Total viajes del mes de consulta en la zona de consulta: " + modelo.darViajesPorMesYZonaO(mesConsulta, idOrigen).size());
+					System.out.println("Porcentaje de viajes en el mes de consulta partiendo de la zona consultada: " + (float)(modelo.darViajesPorMesYZonaO(mesConsulta, idOrigen).size()*100)/modelo.darNumViajes() +"%");
 				}
 				break; 
 
