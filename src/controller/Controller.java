@@ -2,21 +2,23 @@ package controller;
 
 import java.util.Scanner;
 
+import model.data_structures.IListaSencillamenteEncadenada;
 import model.logic.MVCModelo;
+import model.logic.Viaje;
 import view.MVCView;
 
 public class Controller {
 
 	/* Instancia del Modelo*/
 	private MVCModelo modelo;
-	
+
 	/* Instancia de la Vista*/
 	private MVCView view;
-	
+
 	private int mesConsulta = 0;
-	
+
 	private int idOrigen = 0;
-	
+
 	/**
 	 * Crear la vista y el modelo del proyecto
 	 * @param capacidad tamaNo inicial del arreglo
@@ -26,7 +28,7 @@ public class Controller {
 		view = new MVCView();
 		modelo = new MVCModelo();
 	}
-		
+
 	public void run() 
 	{
 		Scanner lector = new Scanner(System.in);
@@ -39,75 +41,110 @@ public class Controller {
 
 			int option = lector.nextInt();
 			switch(option){
-				case 1:
-					System.out.println("--------- \nCrear Arreglo \nDar capacidad inicial del arreglo: ");
-				    int capacidad = lector.nextInt();
-				    modelo = new MVCModelo(); 
-					System.out.println("Arreglo Dinamico creado");
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
+			case 1:
+				System.out.println("--------- \nSe cargaran los datos: ");
+				modelo = new MVCModelo(); 
+				modelo.cargarDatos();
+				System.out.println("Datos cargados");
+				System.out.println("Numero de viajes cargados: " + modelo.darNumViajes());
+				break;
 
-				case 2:
-					System.out.println("--------- \nDar mes(numero) a consultar: ");
-					dato = lector.next();
-					try
+			case 2:
+				System.out.println("--------- \nDar mes(numero) a consultar: ");
+				dato = lector.next();
+				try
+				{
+					int temp = Integer.parseInt(dato);
+					if(temp >= 1 && temp <= 12)
 					{
-						mesConsulta = Integer.parseInt(dato);
+						mesConsulta = temp;
 						System.out.println("Mes guardado");
 					}
-					catch(NumberFormatException e)
+					else
 					{
-						System.out.println("Debe ingresar el mes como un numero");
+						System.out.println("Mes invalido");
 					}
-					break;
+				}
+				catch(NumberFormatException e)
+				{
+					System.out.println("Debe ingresar el mes como un numero");
+				}
+				break;
 
-				case 3:
-					System.out.println("--------- \nDar identificador de la zona de origen a consultar: ");
-					dato = lector.next();
-					try
-					{
-						idOrigen = Integer.parseInt(dato);
-						System.out.println("Identificador guardado");
-					}
-					catch(NumberFormatException e)
-					{
-						System.out.println("Identificador invalido");
-					}
-					break;
+			case 3:
+				System.out.println("--------- \nDar identificador de la zona de origen a consultar: ");
+				dato = lector.next();
+				try
+				{
+					idOrigen = Integer.parseInt(dato);
+					System.out.println("Identificador guardado");
+				}
+				catch(NumberFormatException e)
+				{
+					System.out.println("Identificador invalido");
+				}
+				break;
 
-				case 4:
-					System.out.println("--------- \nDatos de los viajes: ");
-					if(mesConsulta == 0)
+			case 4:
+				System.out.println("--------- \nDatos de los viajes: ");
+				if(mesConsulta <= 0)
+				{
+					System.out.println("Debe ingresar un mes de cosulta valido");
+				}
+				if(idOrigen <= 0)
+				{
+					System.out.println("Debe ingresar una zona de origen de consulta valida");
+				}
+				if(idOrigen > 0 && mesConsulta > 0)
+				{
+					//pendiente
+					IListaSencillamenteEncadenada<Viaje> lViajes = modelo.darViajesPorMesYZonaO(mesConsulta, idOrigen);
+					if(lViajes.isEmpty())
 					{
-						System.out.println("No se ha ingresado un mes");
+						System.out.println("No hay viajes que hayan salido de la zona de origen " + idOrigen + " durante el mes " + mesConsulta);
 					}
-					if(idOrigen == 0)
+					else
 					{
-						System.out.println("No se ha ingresado una zona de origen");
+						System.out.println("Lista de los datos de los viajes encontrados en el siguiente orden: : zona origen, zona destino, tiempo promedio y desviación estándar");
+						for(Viaje viaje: lViajes)
+						{
+							System.out.println(viaje.darIDOrigen() + ", " + viaje.darIdDestino() + ", " + viaje.darTiempoViaje() + ", " + viaje.darDesviacionTiempo());
+						}
 					}
-					if(idOrigen >= 0 && mesConsulta >= 0)
-					{
-						//pendiente
-					}
-					break;
+				}
+				break;
 
-				case 5: 
-					System.out.println("--------- \nEstadisticas de los viajes: ");
-					view.printModelo(modelo);
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;	
-					
-				case 6: 
-					System.out.println("--------- \n Hasta pronto !! \n---------"); 
-					lector.close();
-					fin = true;
-					break;	
+			case 5: 
+				System.out.println("--------- \nEstadisticas de los viajes: ");
+				if(mesConsulta <= 0)
+				{
+					System.out.println("Debe ingresar un mes de cosulta valido");
+				}
+				if(idOrigen <= 0)
+				{
+					System.out.println("Debe ingresar una zona de origen de consulta valida");
+				}
+				if(idOrigen > 0 && mesConsulta > 0)
+				{
+					//Pendiente
+					System.out.println("-----Estadisticas:\n");
+					System.out.println("Total viajes del semestre:    /n");
+					System.out.println("Porcentaje de viajes en el mes de consulta:     /n");
+					System.out.println("Porcentaje de viajes en el mes de consulta partiendo de la zona consultada:     /n");
+				}
+				break; 
 
-				default: 
-					System.out.println("--------- \n Opcion Invalida !! \n---------");
-					break;
+			case 6: 
+				System.out.println("--------- \n Hasta pronto !! \n---------"); 
+				lector.close();
+				fin = true;
+				break; 
+
+			default: 
+				System.out.println("--------- \n Opcion Invalida !! \n---------");
+				break;
 			}
 		}
-		
-	}	
+
+	} 	
 }

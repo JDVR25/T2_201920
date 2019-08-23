@@ -20,4 +20,23 @@ public class MVCModelo {
 	{
 		datos = new ListaSencillamenteEncadenada<>();
 	}
+	
+	public void cargarDatos()
+	{
+	}
+	public int darNumViajes()
+	{
+	return datos.size();
+	}
+	public IListaSencillamenteEncadenada<Viaje> darViajesPorMesYZonaO(int pMes, int pIdO)
+	{
+	//pendiente
+	IListaSencillamenteEncadenada<Viaje> lista = new ListaSencillamenteEncadenada<Viaje>();
+	return lista;
+	}
+	public int darNumViajesPorMes(int pMes)
+	{
+	//pendiente
+	return 0;
+	}
 }
