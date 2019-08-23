@@ -126,11 +126,12 @@ public class Controller {
 				}
 				if(idOrigen > 0 && mesConsulta > 0)
 				{
-					//Pendiente
 					System.out.println("-----Estadisticas:\n");
-					System.out.println("Total viajes del semestre:    /n");
-					System.out.println("Porcentaje de viajes en el mes de consulta:     /n");
-					System.out.println("Porcentaje de viajes en el mes de consulta partiendo de la zona consultada:     /n");
+					System.out.println("Total viajes del semestre: " + modelo.darNumViajes() + "    /n");
+					System.out.println("Total viajes del mes de consulta: " + modelo.darNumViajesPorMes(mesConsulta) + "    /n");
+					System.out.println("Porcentaje de viajes en el mes de consulta: " + (modelo.darNumViajesPorMes(mesConsulta)/modelo.darNumViajes())*100 +"%     /n");
+					System.out.println("Total viajes del mes de conslta en la zona de consulta: " + modelo.darViajesPorMesYZonaO(mesConsulta, idOrigen).size() + "    /n");
+					System.out.println("Porcentaje de viajes en el mes de consulta partiendo de la zona consultada: " + (modelo.darViajesPorMesYZonaO(mesConsulta, idOrigen).size()/modelo.darNumViajes())*100 +"%    /n");
 				}
 				break; 
 
