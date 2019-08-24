@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import com.opencsv.CSVReader;
 
-import model.data_structures.IListaSencillamenteEncadenada;
-import model.data_structures.ListaSencillamenteEncadenada;
+import model.data_structures.IEstructura;
+import model.data_structures.Stack;
 
 /**
  * Definicion del modelo del mundo
@@ -17,14 +17,14 @@ public class MVCModelo {
 	/**
 	 * Atributos del modelo del mundo
 	 */
-	private IListaSencillamenteEncadenada<Viaje> datos;
+	private IEstructura<Viaje> datos;
 
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
 	public MVCModelo()
 	{
-		datos = new ListaSencillamenteEncadenada<>();
+		datos = new Stack<>();
 	}
 
 	public void cargarDatos()
@@ -76,9 +76,9 @@ public class MVCModelo {
 		return datos.size();
 	}
 
-	public IListaSencillamenteEncadenada<Viaje> darViajesPorMesYZonaO(int pMes, int pIdO)
+	public IEstructura<Viaje> darViajesPorMesYZonaO(int pMes, int pIdO)
 	{
-		IListaSencillamenteEncadenada<Viaje> lista = new ListaSencillamenteEncadenada<Viaje>();
+		IEstructura<Viaje> lista = new Stack<Viaje>();
 		for(Viaje temp: datos)
 		{
 			if(temp.darMes() == pMes && temp.darIDOrigen() == pIdO)

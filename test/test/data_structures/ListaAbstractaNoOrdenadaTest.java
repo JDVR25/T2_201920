@@ -58,7 +58,7 @@ public abstract class ListaAbstractaNoOrdenadaTest extends ListaAbstractaTest
 		{
 			assertEquals("El elemento en la posición " + i + " no es el esperado", ARREGLO_ESCENARIO_2[i], arreglo[i]);
 			assertTrue("La lista no contiene " + ARREGLO_ESCENARIO_2[i], lista.contains(ARREGLO_ESCENARIO_2[i]));
-			assertEquals("El elemento en la posición " + i + " no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), lista.get(i));
+			assertEquals("El elemento en la posición " + i + " no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), lista.getFirst(i));
 		}
 	}
 	
@@ -83,7 +83,7 @@ public abstract class ListaAbstractaNoOrdenadaTest extends ListaAbstractaTest
 		
 		for(int i = 0; i < lista.size(); i ++)
 		{
-			assertEquals("El elemento en la posición " + i  + " no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), lista.get(i));
+			assertEquals("El elemento en la posición " + i  + " no es el esperado", new Integer(ARREGLO_ESCENARIO_2[i]), lista.getFirst(i));
 		}
 	}
 	
@@ -108,7 +108,7 @@ public abstract class ListaAbstractaNoOrdenadaTest extends ListaAbstractaTest
 		{
 			lista.add(0, 5);
 			assertEquals("El tamaño de la lista no es correcto", 1, lista.size());
-			assertEquals("El elemento no es el esperado", new Integer(5), lista.get(0));
+			assertEquals("El elemento no es el esperado", new Integer(5), lista.getFirst(0));
 		}
 		catch(IndexOutOfBoundsException e)
 		{
@@ -143,19 +143,19 @@ public abstract class ListaAbstractaNoOrdenadaTest extends ListaAbstractaTest
 		{
 			lista.add(0, 5);
 			assertEquals("El tamaño de la lista no es correcto", 21, lista.size());
-			assertEquals("El elemento no es el esperado", new Integer(5), lista.get(0));
-			assertEquals("El elemento no es el esperado", new Integer(350), lista.get(1));
+			assertEquals("El elemento no es el esperado", new Integer(5), lista.getFirst(0));
+			assertEquals("El elemento no es el esperado", new Integer(350), lista.getFirst(1));
 			
 			lista.add(21, 290);
 			assertEquals("El tamaño de la lista no es correcto", 22, lista.size());
-			assertEquals("El elemento no es el esperado", new Integer(290), lista.get(21));
-			assertEquals("El elemento no es el esperado", new Integer(396), lista.get(20));
+			assertEquals("El elemento no es el esperado", new Integer(290), lista.getFirst(21));
+			assertEquals("El elemento no es el esperado", new Integer(396), lista.getFirst(20));
 			
 			lista.add(10, 580);
 			assertEquals("El tamaño de la lista no es correcto", 23, lista.size());
-			assertEquals("El elemento no es el esperado", new Integer(580), lista.get(10));
-			assertEquals("El elemento no es el esperado", new Integer(80), lista.get(9));
-			assertEquals("El elemento no es el esperado", new Integer(360), lista.get(11));
+			assertEquals("El elemento no es el esperado", new Integer(580), lista.getFirst(10));
+			assertEquals("El elemento no es el esperado", new Integer(80), lista.getFirst(9));
+			assertEquals("El elemento no es el esperado", new Integer(360), lista.getFirst(11));
 		}
 		catch(IndexOutOfBoundsException e)
 		{

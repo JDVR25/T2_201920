@@ -2,7 +2,7 @@ package controller;
 
 import java.util.Scanner;
 
-import model.data_structures.IListaSencillamenteEncadenada;
+import model.data_structures.IEstructura;
 import model.logic.MVCModelo;
 import model.logic.Viaje;
 import view.MVCView;
@@ -98,7 +98,7 @@ public class Controller {
 				if(idOrigen > 0 && mesConsulta > 0)
 				{
 					//pendiente
-					IListaSencillamenteEncadenada<Viaje> lViajes = modelo.darViajesPorMesYZonaO(mesConsulta, idOrigen);
+					IEstructura<Viaje> lViajes = modelo.darViajesPorMesYZonaO(mesConsulta, idOrigen);
 					if(lViajes.isEmpty())
 					{
 						System.out.println("No hay viajes que hayan salido de la zona de origen " + idOrigen + " durante el mes " + mesConsulta);

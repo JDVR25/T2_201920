@@ -7,7 +7,7 @@ import java.util.Iterator;
  * Clase que contiene lo com�n entre las listas encadenadas.
  * @param <E> Elemento que se almacenar� en la lista, el elemento debe ser �nicamente identificado.
  */
-public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamenteEncadenada<E>, Serializable
+public abstract class ListaEncadenadaAbstracta<E> implements IEstructura<E>, Serializable
 {
 
 	/**
@@ -25,7 +25,6 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 	 */
 	protected Nodo<E> primerNodo;
 
-	@Override
 	@SuppressWarnings("unchecked")
 	public Object[] toArray() 
 	{
@@ -48,7 +47,6 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 		return cantidadElementos;
 	}
 
-	@Override
 	public E set(int index, E element) throws IndexOutOfBoundsException 
 	{
 		Nodo<E> nodo = primerNodo;
@@ -85,7 +83,6 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 		return cantidadElementos == 0? true: false;
 	}
 
-	@Override
 	public E get(int index) throws IndexOutOfBoundsException
 	{
 		Nodo<E> nodo = primerNodo;
@@ -133,7 +130,6 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 		return actual;
 	}
 
-	@Override
 	public boolean contains(Object o) 
 	{
 		boolean contiene = false;
@@ -161,6 +157,11 @@ public abstract class ListaEncadenadaAbstracta<E> implements IListaSencillamente
 	{
 		primerNodo = null;
 		cantidadElementos = 0;
+	}
+	
+	public E getFirst()
+	{
+		return primerNodo.darElemento();
 	}
 	//Codigo basado en lo desarrollado en el ejercicio de nivel 9 de APO 2 (Honores) 201910
 }

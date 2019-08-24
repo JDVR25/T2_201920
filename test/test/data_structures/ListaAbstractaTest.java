@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.data_structures.IListaSencillamenteEncadenada;
+import model.data_structures.IEstructura;
 
 /**
  * Clase de prueba con los métodos necesarios para probar cualquier tipo de lista.
@@ -26,7 +26,7 @@ public abstract class ListaAbstractaTest
 	/**
 	 * Lista sobre la que se realizarán las pruebas.
 	 */
-	protected IListaSencillamenteEncadenada<Integer> lista;
+	protected IEstructura<Integer> lista;
 	
 	/**
 	 * Arreglo con los elementos del escenario 2 (sirve para realizar pruebas exhaustivas).
@@ -349,7 +349,7 @@ public abstract class ListaAbstractaTest
 		assertEquals("La lista no quedó vacía", 0, lista.size());
 		try
 		{
-			lista.get(0);
+			lista.getFirst(0);
 			fail("No debería poder recuperar el primer elemento de la lista");
 		}
 		catch (IndexOutOfBoundsException e) 
@@ -367,7 +367,7 @@ public abstract class ListaAbstractaTest
 		//Revisa la lista vacía.
 		try
 		{
-			lista.get(0);
+			lista.getFirst(0);
 			fail("Debería lanzar excepción porque la lista está vacía.");
 		}
 		catch(IndexOutOfBoundsException e)
@@ -377,7 +377,7 @@ public abstract class ListaAbstractaTest
 		
 		try
 		{
-			lista.get(-1);
+			lista.getFirst(-1);
 			fail("Debería lanzar excepción porque el índice no existe");
 		}
 		catch(IndexOutOfBoundsException e)
@@ -387,7 +387,7 @@ public abstract class ListaAbstractaTest
 		
 		try
 		{
-			lista.get(-50);
+			lista.getFirst(-50);
 			fail("Debería lanzar excepción porque el índice no existe");
 		}
 		catch(IndexOutOfBoundsException e)
@@ -400,7 +400,7 @@ public abstract class ListaAbstractaTest
 		
 		try
 		{
-			lista.get(-1);
+			lista.getFirst(-1);
 			fail("Debería lanzar excepción porque el índice no existe");
 		}
 		catch(IndexOutOfBoundsException e)
@@ -410,7 +410,7 @@ public abstract class ListaAbstractaTest
 		
 		try
 		{
-			lista.get(-50);
+			lista.getFirst(-50);
 			fail("Debería lanzar excepción porque el índice no existe");
 		}
 		catch(IndexOutOfBoundsException e)
@@ -420,7 +420,7 @@ public abstract class ListaAbstractaTest
 		
 		try
 		{
-			lista.get(500);
+			lista.getFirst(500);
 			fail("Debería lanzar excepción porque el índice está por fuera de la lista");
 		}
 		catch(IndexOutOfBoundsException e)
@@ -430,7 +430,7 @@ public abstract class ListaAbstractaTest
 		
 		try
 		{
-			lista.get(lista.size());
+			lista.getFirst(lista.size());
 			fail("Debería lanzar excepción porque el índice está por fuera de la lista");
 		}
 		catch(IndexOutOfBoundsException e)
@@ -442,7 +442,7 @@ public abstract class ListaAbstractaTest
 		{
 			try
 			{
-				Integer elemento = lista.get(i);
+				Integer elemento = lista.getFirst(i);
 				assertNotNull("Los elementos recuperados no pueden ser nulos", elemento);
 			}
 			catch(IndexOutOfBoundsException e)
@@ -504,27 +504,27 @@ public abstract class ListaAbstractaTest
 		
 		try
 		{
-			Integer paraEliminar = lista.get(0);
+			Integer paraEliminar = lista.getFirst(0);
 			assertEquals("No eliminó el elemento esperado", paraEliminar, lista.remove(0));
 			assertEquals("La lista no tiene el tamaño esperado", 19, lista.size());
 			assertFalse("No eliminó el elemento", lista.contains(paraEliminar));
 			
-			paraEliminar = lista.get(lista.size() - 1);
+			paraEliminar = lista.getFirst(lista.size() - 1);
 			assertEquals("No eliminó el elemento esperado", paraEliminar, lista.remove(lista.size() - 1));
 			assertEquals("La lista no tiene el tamaño esperado", 18, lista.size());
 			assertFalse("No eliminó el elemento", lista.contains(paraEliminar));
 			
-			paraEliminar = lista.get(3);
+			paraEliminar = lista.getFirst(3);
 			assertEquals("No eliminó el elemento esperado", paraEliminar, lista.remove(3));
 			assertEquals("La lista no tiene el tamaño esperado", 17, lista.size());
 			assertFalse("No eliminó el elemento", lista.contains(paraEliminar));
 			
-			paraEliminar = lista.get(15);
+			paraEliminar = lista.getFirst(15);
 			assertEquals("No eliminó el elemento esperado", paraEliminar, lista.remove(15));
 			assertEquals("La lista no tiene el tamaño esperado", 16, lista.size());
 			assertFalse("No eliminó el elemento", lista.contains(paraEliminar));
 			
-			paraEliminar = lista.get(10);
+			paraEliminar = lista.getFirst(10);
 			assertEquals("No eliminó el elemento esperado", paraEliminar, lista.remove(10));
 			assertEquals("La lista no tiene el tamaño esperado", 15, lista.size());
 			assertFalse("No eliminó el elemento", lista.contains(paraEliminar));
@@ -549,7 +549,7 @@ public abstract class ListaAbstractaTest
 		{
 			for(int j = i + 1; j < lista.size(); j++)
 			{
-				if(lista.get(i).intValue() == lista.get(j).intValue())
+				if(lista.getFirst(i).intValue() == lista.getFirst(j).intValue())
 					return true;
 			}
 		}
