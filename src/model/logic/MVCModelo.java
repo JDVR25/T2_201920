@@ -7,6 +7,7 @@ import java.io.IOException;
 import com.opencsv.CSVReader;
 
 import model.data_structures.IEstructura;
+import model.data_structures.Queue;
 import model.data_structures.Stack;
 
 /**
@@ -17,14 +18,18 @@ public class MVCModelo {
 	/**
 	 * Atributos del modelo del mundo
 	 */
-	private IEstructura<Viaje> datos;
+	private Stack<Viaje> pila;
+	
+	private Queue<Viaje> fila;
 
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
 	public MVCModelo()
 	{
-		datos = new Stack<>();
+		pila = new Stack<Viaje>();
+		
+		fila = new Queue<Viaje>();
 	}
 
 	public void cargarDatos()
@@ -34,7 +39,7 @@ public class MVCModelo {
 
 	public int darNumViajes()
 	{
-		return datos.size();
+		return pila.size();
 	}
 
 	public IEstructura<Viaje> darViajesPorMesYZonaO(int pMes, int pIdO)

@@ -84,58 +84,8 @@ public class Controller {
 					System.out.println("Identificador invalido");
 				}
 				break;
-
-			case 4:
-				System.out.println("--------- \nDatos de los viajes: ");
-				if(mesConsulta <= 0)
-				{
-					System.out.println("Debe ingresar un mes de cosulta valido");
-				}
-				if(idOrigen <= 0)
-				{
-					System.out.println("Debe ingresar una zona de origen de consulta valida");
-				}
-				if(idOrigen > 0 && mesConsulta > 0)
-				{
-					//pendiente
-					IEstructura<Viaje> lViajes = modelo.darViajesPorMesYZonaO(mesConsulta, idOrigen);
-					if(lViajes.isEmpty())
-					{
-						System.out.println("No hay viajes que hayan salido de la zona de origen " + idOrigen + " durante el mes " + mesConsulta);
-					}
-					else
-					{
-						System.out.println("Lista de los datos de los viajes encontrados en el siguiente orden: : zona origen, zona destino, tiempo promedio y desviación estándar");
-						for(Viaje viaje: lViajes)
-						{
-							System.out.println(viaje.darIDOrigen() + ", " + viaje.darIdDestino() + ", " + viaje.darTiempoViaje() + ", " + viaje.darDesviacionTiempo());
-						}
-					}
-				}
-				break;
-
-			case 5: 
-				System.out.println("--------- \nEstadisticas de los viajes: ");
-				if(mesConsulta <= 0)
-				{
-					System.out.println("Debe ingresar un mes de cosulta valido");
-				}
-				if(idOrigen <= 0)
-				{
-					System.out.println("Debe ingresar una zona de origen de consulta valida");
-				}
-				if(idOrigen > 0 && mesConsulta > 0)
-				{
-					System.out.println("-----Estadisticas: \n");
-					System.out.println("Total viajes del semestre: " + modelo.darNumViajes());
-					System.out.println("Total viajes del mes de consulta: " + modelo.darNumViajesPorMes(mesConsulta));
-					System.out.println("Porcentaje de viajes en el mes de consulta: " + (float)(modelo.darNumViajesPorMes(mesConsulta)*100)/modelo.darNumViajes() +"%");
-					System.out.println("Total viajes del mes de consulta en la zona de consulta: " + modelo.darViajesPorMesYZonaO(mesConsulta, idOrigen).size());
-					System.out.println("Porcentaje de viajes en el mes de consulta partiendo de la zona consultada: " + (float)(modelo.darViajesPorMesYZonaO(mesConsulta, idOrigen).size()*100)/modelo.darNumViajes() +"%");
-				}
-				break; 
-
-			case 6: 
+				
+			case 4: 
 				System.out.println("--------- \n Hasta pronto !! \n---------"); 
 				lector.close();
 				fin = true;
