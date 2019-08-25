@@ -15,7 +15,7 @@ public class MVCView
 		public void printMenu()
 		{
 			System.out.println("1. Cargar los viajes de UBER");
-			System.out.println("2. Ingresar mes de consulta");
+			System.out.println("2. Consultar cluster de viajes mas grande segun hora");
 			System.out.println("3. Ingresar identificador de la zona de origen a consultar");
 			System.out.println("4. Consultar viajes del mes de consulta que salieron de la zona de origen dada");
 			System.out.println("5. Consultar estadisticas");
