@@ -96,5 +96,10 @@ public class Stack<E> extends ListaEncadenadaAbstracta<E>
 		return removed; 
 	}
 	
+	public E getFirst()
+	{
+		return primerNodo.darElemento();
+	}
+	
 	//Codigo basado en lo desarrollado en el ejercicio de nivel 9 de APO 2 (Honores) 201910
 }

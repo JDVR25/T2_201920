@@ -159,9 +159,6 @@ public abstract class ListaEncadenadaAbstracta<E> implements IEstructura<E>, Ser
 		cantidadElementos = 0;
 	}
 	
-	public E getFirst()
-	{
-		return primerNodo.darElemento();
-	}
+	
 	//Codigo basado en lo desarrollado en el ejercicio de nivel 9 de APO 2 (Honores) 201910
 }

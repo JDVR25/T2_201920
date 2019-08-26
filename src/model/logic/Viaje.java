@@ -6,7 +6,7 @@ public class Viaje
 	
 	private int idZonaDestino;
 	
-	private int mes;
+	private int hora;
 	
 	private double tiempoPromedioViaje;
 	
@@ -16,14 +16,14 @@ public class Viaje
 	
 	private double desviacionEstandarTGeometrico;
 	
-	public Viaje(int sourceID, int dsTID, int month, double travelTime, double travelTimeDeviation,
+	public Viaje(int sourceID, int dsTID, int hour, double travelTime, double travelTimeDeviation,
 			double geometricTime, double geometricDeviation)
 	{
 		idZonaOrigen = sourceID;
 		
 		idZonaDestino = dsTID;
 		
-		mes = month;
+		hora = hour;
 		
 		tiempoPromedioViaje = travelTime;
 		
@@ -44,9 +44,9 @@ public class Viaje
 		return idZonaDestino;
 	}
 	
-	public int darMes()
+	public int darhora()
 	{
-		return mes;
+		return hora;
 	}
 	
 	public double darTiempoViaje()
