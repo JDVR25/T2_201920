@@ -19,7 +19,7 @@ public class MVCModelo {
 	 * Atributos del modelo del mundo
 	 */
 	private Stack<Viaje> pila;
-	
+
 	private Queue<Viaje> fila;
 
 	/**
@@ -37,27 +37,37 @@ public class MVCModelo {
 		CSVReader reader = null;
 		try 
 		{
-
-			reader = new CSVReader(new FileReader("./data/bogota-cadastral-2018-1-All-HourlyAggregate.csv"));
-			for(String[] nextLine : reader) 
+			reader = new CSVReader(new FileReader("./data/bogota-cadastral-2018-1-All-HourlyAggregate"));
+			for(String[] param : reader)
 			{
-				System.out.println("col1: " + nextLine[0] + ", col2: "+ nextLine[1]);
+				try
+				{
+					Viaje nuevo = new Viaje(Integer.parseInt(param[0]), Integer.parseInt(param[1]), 
+							Integer.parseInt(param[2]), Double.parseDouble(param[3]), Double.parseDouble(param[4]),
+							Double.parseDouble(param[5]), Double.parseDouble(param[6]));
+					pila.push(nuevo);
+					fila.enqueue(nuevo);
+				}
+				catch(NumberFormatException e)
+				{
+
+				}
 			}
 
-		} 
-		catch (FileNotFoundException e) 
+		}
+		catch (FileNotFoundException e)
 		{
 			e.printStackTrace();
-		} 
+		}
 		finally
 		{
-			if (reader != null) 
+			if (reader != null)
 			{
-				try 
+				try
 				{
 					reader.close();
-				} 
-				catch (IOException e) 
+				}
+				catch (IOException e)
 				{
 					e.printStackTrace();
 				}
@@ -71,24 +81,14 @@ public class MVCModelo {
 		return pila.size();
 	}
 
-	public IEstructura<Viaje> darViajesPorMesYZonaO(int pMes, int pIdO)
+	public Stack<Viaje> darUltimosNViajes(int hour, int howManyYouWant)
 	{
-		return null;
-	}
-
-	public int darNumViajesPorMes(int pMes)
-	{
-		return 0;
-	}
-	
-	public Stack whatYouWanted(int hour, int howManyYouWant)
-	{
-		Stack stack1 = new Stack(); 
+		Stack<Viaje> stack1 = new Stack<Viaje>(); 
 		int i = 0;
 		while (i < howManyYouWant && !pila.isEmpty() )
 		{
 			Viaje temp = pila.pop(); 
-			if (temp.darhora() == hour)
+			if (temp.darHora() == hour)
 			{
 				stack1.push(temp);
 				i++; 
@@ -97,18 +97,18 @@ public class MVCModelo {
 		return stack1; 
 	}
 
-	public Queue eliminateCluster(int hour)
+	public Queue<Viaje> eliminateCluster(int hour)
 	{
-		Queue fila1 = new Queue(); 
-		Queue fila2 = new Queue(); 
+		Queue<Viaje> fila1 = new Queue<Viaje>(); 
+		Queue<Viaje> fila2 = new Queue<Viaje>(); 
 		for(int i = 0; i < fila.size(); i++ )
 		{
 			Viaje temp = fila.dequeue();
-			if (temp.darhora() == hour && fila2.isEmpty())
+			if (temp.darHora() == hour && fila2.isEmpty())
 			{
 				fila2.enqueue(temp);
 			}
-			else if (((Viaje) fila2.getFirst()).darhora() < temp.darhora())
+			else if (fila2.getFirst().darHora() < temp.darHora())
 			{
 				fila2.enqueue(temp);
 			}
@@ -118,16 +118,16 @@ public class MVCModelo {
 				{
 					fila1 = fila2; 
 				}
-				
-				fila2 = new Queue(); 
+
+				fila2 = new Queue<Viaje>(); 
 			}
 		}
-		
+
 		if(fila2.size() > fila1.size())
 		{
 			fila1 = fila2; 
 		}
-		
+
 		return fila1; 
 	}
 }

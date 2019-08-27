@@ -3,6 +3,8 @@ package controller;
 import java.util.Scanner;
 
 import model.data_structures.IEstructura;
+import model.data_structures.Queue;
+import model.data_structures.Stack;
 import model.logic.MVCModelo;
 import model.logic.Viaje;
 import view.MVCView;
@@ -14,10 +16,6 @@ public class Controller {
 
 	/* Instancia de la Vista*/
 	private MVCView view;
-
-	private int mesConsulta = 0;
-
-	private int idOrigen = 0;
 
 	/**
 	 * Crear la vista y el modelo del proyecto
@@ -50,38 +48,56 @@ public class Controller {
 				break;
 
 			case 2:
-				System.out.println("--------- \nDar mes(numero) a consultar: ");
+				System.out.println("--------- \nIngrese la hora de inicio: ");
 				dato = lector.next();
 				try
 				{
-					int temp = Integer.parseInt(dato);
-					if(temp >= 1 && temp <= 12)
+					int hora = Integer.parseInt(dato);
+					if(hora >= 0 && hora < 24)
 					{
-						mesConsulta = temp;
-						System.out.println("Mes guardado");
+						Queue<Viaje> cluster = modelo.eliminateCluster(hora);
+						System.out.println("Numero de viajes: " + cluster.size());
+						for(Viaje viaje: cluster)
+						{
+							System.out.println(viaje.darHora() + ", " + viaje.darIDOrigen() + ", " + viaje.darIdDestino() + ", " + viaje.darTiempoViaje());
+						}
 					}
 					else
 					{
-						System.out.println("Mes invalido");
+						System.out.println("Hora invalido");
 					}
 				}
 				catch(NumberFormatException e)
 				{
-					System.out.println("Debe ingresar el mes como un numero");
+					System.out.println("Debe ingresar la hora como un numero");
 				}
 				break;
 
 			case 3:
-				System.out.println("--------- \nDar identificador de la zona de origen a consultar: ");
+				System.out.println("--------- \nIngrese la hora de inicio: ");
 				dato = lector.next();
 				try
 				{
-					idOrigen = Integer.parseInt(dato);
-					System.out.println("Identificador guardado");
+					int hora = Integer.parseInt(dato);
+					System.out.println("--------- \nIngrese la cantidad de datos deseados: ");
+					dato = lector.next();
+					int cant = Integer.parseInt(dato);
+					if(hora >= 0 && hora < 24 && cant >= 0)
+					{
+						Stack<Viaje> cluster = modelo.darUltimosNViajes(hora, cant);
+						for(Viaje viaje: cluster)
+						{
+							System.out.println(viaje.darHora() + ", " + viaje.darIDOrigen() + ", " + viaje.darIdDestino() + ", " + viaje.darTiempoViaje());
+						}
+					}
+					else
+					{
+						System.out.println("Hora o cantidad invalida");
+					}
 				}
 				catch(NumberFormatException e)
 				{
-					System.out.println("Identificador invalido");
+					System.out.println("Tanto la hora como el numero de datos deben ser numeros");
 				}
 				break;
 				

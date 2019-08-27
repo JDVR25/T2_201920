@@ -44,7 +44,7 @@ public class Viaje
 		return idZonaDestino;
 	}
 	
-	public int darhora()
+	public int darHora()
 	{
 		return hora;
 	}
