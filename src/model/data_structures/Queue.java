@@ -4,15 +4,18 @@ import java.util.Iterator;
 
 public class Queue<E> extends ListaEncadenadaAbstracta<E>
 {	
+	protected Nodo<E> ultimo;
 	@SuppressWarnings("unchecked")
 	public Queue()
 	{
 		primerNodo = null;
+		ultimo = null;
 	}
 	
 	public Queue(E element)
 	{
 		primerNodo = new Nodo<E>(element);
+		ultimo = primerNodo;
 		cantidadElementos = 1;
 	}
 
@@ -50,14 +53,15 @@ public class Queue<E> extends ListaEncadenadaAbstracta<E>
 		if(primerNodo == null)
 		{
 			primerNodo = new Nodo<E>(elemento);
+			ultimo = primerNodo;
 			cantidadElementos = 1;
 			agregado = true;
 		}
 		else
 		{
-			Nodo<E> nuevoPrimero= new Nodo<E>(elemento);
-			nuevoPrimero.cambiarSiguiente(primerNodo);
-			primerNodo = nuevoPrimero; 
+			Nodo<E> nuevo= new Nodo<E>(elemento);
+			ultimo.cambiarSiguiente(nuevo);
+			ultimo = nuevo; 
 			cantidadElementos++; 
 			agregado = true;
 		}
@@ -69,37 +73,14 @@ public class Queue<E> extends ListaEncadenadaAbstracta<E>
 	 */
 	public E dequeue() 
 	{
-		boolean removed;
-		Nodo<E> actual = primerNodo; 
-		E elementRemoved = null; 
-		if (primerNodo == null)
+		E removed = null;
+		if (primerNodo != null)
 		{
-			removed = false; 
+			removed = primerNodo.darElemento();
+			primerNodo = primerNodo.darSiguiente();
+			cantidadElementos--;
 		}
-		else if(primerNodo.darSiguiente() == null)
-		{
-			elementRemoved = primerNodo.darElemento(); 
-			primerNodo = null; 
-			removed = true; 
-		}
-		else 
-		{	
-			while(actual != null && actual.darSiguiente() != null) 
-			{
-				if (actual.darSiguiente().darSiguiente() == null)
-				{
-					elementRemoved = actual.darSiguiente().darElemento(); 
-					actual.cambiarSiguiente(null);
-				}
-				else
-				{
-					actual = actual.darSiguiente(); 
-				}
-			}
-
-			removed = true; 
-		}
-		return elementRemoved;
+		return removed; 
 	}
 
 	@Override
